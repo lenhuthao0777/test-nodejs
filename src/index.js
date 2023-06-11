@@ -3,10 +3,8 @@ const cors = require('cors')
 const axios = require('axios')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
-const helmet = require('helmet')
 const morgan = require('morgan')
 const cheerio = require('cheerio')
-const fs = require('fs')
 const mongoose = require('mongoose')
 const raceModel = require('./race.model')
 const seasonModel = require('./season.model')
@@ -26,9 +24,8 @@ app.use(
   })
 )
 
-app.use(helmet())
-
 app.use(morgan('dev'))
+
 const url = 'https://www.formula1.com/en/results.html/2018/races.html'
 const getHtml = async () => {
   const { data: html } = await axios.get(url).then((res) => res)
@@ -315,7 +312,7 @@ const DatabaseConnect = async () => {
 
 DatabaseConnect()
 
-app.listen(process.env.PORT, () =>
+app.listen(process.env.PORT || 3100, () =>
   console.log('app listen port', process.env.PORT)
 )
 
