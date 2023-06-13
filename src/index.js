@@ -50,9 +50,11 @@ app.get('/v1/race', async (req, res) => {
 
     return res.status(200).json({
       data: year ? ans : data,
-      page_size: Number(page_size),
-      page: Number(page),
-      total_page: Math.ceil(size.length / Number(page_size)),
+      pagination: {
+        page_size: Number(page_size),
+        page: Number(page),
+        total_page: Math.ceil(size.length / Number(page_size)),
+      },
     })
   } catch (error) {
     res.status(500).json(error)
