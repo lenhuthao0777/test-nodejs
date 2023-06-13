@@ -53,7 +53,9 @@ app.get('/v1/race', async (req, res) => {
       pagination: {
         page_size: Number(page_size),
         page: Number(page),
-        total_page: Math.ceil(size.length / Number(page_size)),
+        total_page: year
+          ? Math.ceil(ans.length / Number(page_size))
+          : Math.ceil(size.length / Number(page_size)),
       },
     })
   } catch (error) {
